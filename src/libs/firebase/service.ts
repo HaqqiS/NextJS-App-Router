@@ -1,14 +1,4 @@
-import {
-    addDoc,
-    collection,
-    doc,
-    getDoc,
-    getDocs,
-    getFirestore,
-    query,
-    updateDoc,
-    where,
-} from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import app from "./init";
 import bcrypt from "bcrypt";
 
@@ -82,7 +72,7 @@ export async function loginWithGoogle(data: any, callback: any) {
 
     if (user.length > 0) {
         data.role = user[0].role;
-        await updateDoc(doc(firestore, "users"), data).then(() => {
+        await updateDoc(doc(firestore, "users", user[0].id), data).then(() => {
             callback({ status: true, data: data });
         });
     } else {
